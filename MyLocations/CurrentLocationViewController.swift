@@ -169,6 +169,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     func didTimeOut() {
         print("*** Time out")
+        
         if location == nil {
             stopLocationManager()
             lastLocationError = NSError(domain: "MyLocationsErrorDomain", code: 1, userInfo: nil)
