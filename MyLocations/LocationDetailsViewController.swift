@@ -57,10 +57,20 @@ class LocationDetailsViewController: UITableViewController {
         }
         dateLabel.text = format(date: Date())
         
-        //the keyboard is disappear after somebody tapped anywhere else on the screen. 
+        //the keyboard is disappear after somebody tapped anywhere else on the screen.
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    //It method check where a user tap
+    func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+        let point = gestureRecognizer.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
+        return
+        }
+    descriptionTextView.resignFirstResponder()
     }
     
     func string(from placemark: CLPlacemark) -> String {
