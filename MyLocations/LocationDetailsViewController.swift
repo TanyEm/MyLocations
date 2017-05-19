@@ -56,6 +56,11 @@ class LocationDetailsViewController: UITableViewController {
             addressLabel.text = "No Address Found"
         }
         dateLabel.text = format(date: Date())
+        
+        //the keyboard is disappear after somebody tapped anywhere else on the screen. 
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        gestureRecognizer.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(gestureRecognizer)
     }
     
     func string(from placemark: CLPlacemark) -> String {
@@ -92,20 +97,29 @@ class LocationDetailsViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     //the reverse geocoded address should completely fit in the Address cell
-    override func tableView(_ tableView: UITableView,
-                            heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 {
             return 88
         } else if indexPath.section == 2 && indexPath.row == 2 {
-            addressLabel.frame.size = CGSize(
-                width: view.bounds.size.width - 115,
-                height: 10000)
+            addressLabel.frame.size = CGSize(width: view.bounds.size.width - 115, height: 10000)
             addressLabel.sizeToFit()
-            addressLabel.frame.origin.x = view.bounds.size.width -
-                addressLabel.frame.size.width - 15
+            addressLabel.frame.origin.x = view.bounds.size.width - addressLabel.frame.size.width - 15
             return addressLabel.frame.size.height + 20
         } else {
             return 44
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if indexPath.section == 0 || indexPath.section == 1 {
+            return indexPath
+        } else {
+            return nil
+        }
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            descriptionTextView.becomeFirstResponder()
         }
     }
 }

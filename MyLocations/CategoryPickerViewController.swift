@@ -47,12 +47,10 @@ class CategoryPickerViewController: UITableViewController {
     }
     
     // MARK: - UITableViewDataSource
-    override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
     }
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "Cell", for: indexPath)
         let categoryName = categories[indexPath.row]
@@ -66,8 +64,7 @@ class CategoryPickerViewController: UITableViewController {
     }
     
     // MARK: - UITableViewDelegate
-    override func tableView(_ tableView: UITableView,
-                            didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row != selectedIndexPath.row {
             if let newCell = tableView.cellForRow(at: indexPath) {
                 newCell.accessoryType = .checkmark
