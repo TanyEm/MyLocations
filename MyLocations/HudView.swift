@@ -19,6 +19,7 @@ class HudView: UIView {
         view.addSubview(hudView)
         view.isUserInteractionEnabled = false
         
+        hudView.show(animated: animated)
         return hudView
     }
     
@@ -53,5 +54,32 @@ class HudView: UIView {
             x: center.x - round(textSize.width / 2),
             y: center.y - round(textSize.height / 2) + boxHeight / 4)
         text.draw(at: textPoint, withAttributes: attribs)
+    }
+    
+    func show(animated: Bool) {
+        if animated {
+            //It is setted up the initial state of the view before the animation starts.
+            // Here is setted alpha to 0, making the view fully transparent.
+            alpha = 0
+            //It is setted the transform to a scale factor of 1.3
+            transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            /*
+             
+             UIView.animate(withDuration: 0.3, animations: {
+             self.alpha = 1
+             self.transform = CGAffineTransform.identity
+             })
+             */
+            //There is called UIView.animate(withDuration:...) to set up ananimation
+            // UIKit will animate the properties that are changed inside the closure from their initial state to the final state.
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
+                // Inside the closure, set up the new state of the view that its hould have after the animation completes.
+                // You set alpha to 1, which means the HudView is now fully opaque.
+                self.alpha = 1
+                // You also set the transform to the “identity” transform, restoring the scale back to normal.
+                self.transform = CGAffineTransform.identity
+            },
+                           completion: nil)
+        }
     }
 }
