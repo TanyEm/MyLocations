@@ -32,6 +32,13 @@ class LocationDetailsViewController: UITableViewController {
     @IBAction func done() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
         hudView.text = "Tagged"
+        
+        
+        //After 0.6 seconds, the code from the closure finally runs and the screen closes.
+        afterDelay(0.6, closure:
+            {
+                self.dismiss(animated: true, completion: nil)
+        })
     }
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)

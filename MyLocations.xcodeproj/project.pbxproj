@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		736B1C421ED6E1070025212F /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B1C411ED6E1060025212F /* Functions.swift */; };
 		736F85D21EA7C48A0028A7A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F85D11EA7C48A0028A7A4 /* AppDelegate.swift */; };
 		736F85D41EA7C48A0028A7A4 /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F85D31EA7C48A0028A7A4 /* CurrentLocationViewController.swift */; };
 		736F85D61EA7C48A0028A7A4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F85D51EA7C48A0028A7A4 /* SecondViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		736B1C411ED6E1060025212F /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		736F85CE1EA7C48A0028A7A4 /* MyLocations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLocations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		736F85D11EA7C48A0028A7A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		736F85D31EA7C48A0028A7A4 /* CurrentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				736F85DC1EA7C48A0028A7A4 /* LaunchScreen.storyboard */,
 				736F85DF1EA7C48A0028A7A4 /* Info.plist */,
 				738FC0001ECF41F100CDEAF3 /* HudView.swift */,
+				736B1C411ED6E1060025212F /* Functions.swift */,
 			);
 			path = MyLocations;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				736F85D61EA7C48A0028A7A4 /* SecondViewController.swift in Sources */,
 				736F85D21EA7C48A0028A7A4 /* AppDelegate.swift in Sources */,
 				738FC0011ECF41F100CDEAF3 /* HudView.swift in Sources */,
+				736B1C421ED6E1070025212F /* Functions.swift in Sources */,
 				736F85D41EA7C48A0028A7A4 /* CurrentLocationViewController.swift in Sources */,
 				738FBFFF1ECDC29300CDEAF3 /* CategoryPickerViewController.swift in Sources */,
 				738FBFFD1ECC8DAF00CDEAF3 /* LocationDetailsViewController.swift in Sources */,
