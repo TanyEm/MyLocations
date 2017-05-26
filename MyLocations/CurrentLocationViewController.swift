@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var messageLabel: UILabel!
@@ -26,6 +27,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     var performingReverseGeocoding = false
     var lastGeocodingError: Error?
     var timer: Timer?
+    var managedObjectContext: NSManagedObjectContext!
+
     
     @IBAction func getLocation() {
         
@@ -73,6 +76,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 as! LocationDetailsViewController
             controller.coordinate = location!.coordinate
             controller.placemark = placemark
+            //it passes on the context to the Tag Location screen
+            controller.managedObjectContext = managedObjectContext
         }
     }
     

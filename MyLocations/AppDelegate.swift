@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let tabBarController = window!.rootViewController as! UITabBarController
+        
+        if let tabBarViewControllers = tabBarController.viewControllers {
+            let currentLocationViewController = tabBarViewControllers[0] as! CurrentLocationViewController
+            currentLocationViewController.managedObjectContext = managedObjectContext
+        }
+        
         return true
     }
 
@@ -45,7 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //This is the code need to load the data model, and to connect it to an SQLite data store.
     //The goal here is to create a so-called NSManagedObjectContext object.
     lazy var persistentContainer: NSPersistentContainer = {
+        //it instantiate a new NSPersistentContainer object with the name of the data model
         let container = NSPersistentContainer(name: "DataModel")
+        //it is loads the data from the database into memory and sets up the Core Data stack
         container.loadPersistentStores(completionHandler: {
             storeDescription, error in
             if let error = error {
@@ -55,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
+    //create the NSManagedObjectContext object and connectittothe persistent store coordinator
     lazy var managedObjectContext: NSManagedObjectContext = self.persistentContainer.viewContext
 }
 
