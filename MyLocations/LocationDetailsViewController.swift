@@ -23,6 +23,7 @@ class LocationDetailsViewController: UITableViewController {
     var placemark: CLPlacemark?
     var categoryName = "No Category"
     var managedObjectContext: NSManagedObjectContext!
+    var date = Date()
     
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -34,14 +35,29 @@ class LocationDetailsViewController: UITableViewController {
     @IBAction func done() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
         hudView.text = "Tagged"
+        // Сreateed a new Location instance. Because this is a managed object, 
+        // you have to use its init(context:) method
+        let location = Location(context: managedObjectContext)
+        //Here is set Location properties to whatever the user entered in the screen.
+        location.locationDescription = descriptionTextView.text
+        location.category = categoryName
+        location.latitude = coordinate.latitude
+        location.longitude = coordinate.longitude
+        location.date = date
+        location.placemark = placemark
         
-        
-        //After 0.6 seconds, the code from the closure finally runs and the screen closes.
-        afterDelay(0.6, closure:
-            {
-                self.dismiss(animated: true, completion: nil)
-        })
+        //The save() method can fail and therefore you need to catch that potential error.
+        do{
+            try managedObjectContext.save()
+            //After 0.6 seconds, the code from the closure finally runs and the screen closes.
+            afterDelay(0.6) {
+                    self.dismiss(animated: true, completion: nil)
+                }
+        } catch {
+            fatalError("Error: \(error)")
+        }
     }
+        
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)
     }
@@ -56,6 +72,7 @@ class LocationDetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateLabel.text = format(date: date)
         descriptionTextView.text = ""
         categoryLabel.text = categoryName
         latitudeLabel.text = String(format: "%.8f", coordinate.latitude)
