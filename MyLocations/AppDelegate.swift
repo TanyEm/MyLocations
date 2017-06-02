@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let currentLocationViewController = tabBarViewControllers[0] as! CurrentLocationViewController
             currentLocationViewController.managedObjectContext = managedObjectContext
         }
-        
+        print(applicationDocumentsDirectory)
         return true
     }
 
