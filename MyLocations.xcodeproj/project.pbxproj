@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73196FAF1EE5630A0046803D /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73196FAE1EE5630A0046803D /* LocationsViewController.swift */; };
 		736B1C421ED6E1070025212F /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B1C411ED6E1060025212F /* Functions.swift */; };
 		736B1C451ED716F20025212F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 736B1C431ED716F10025212F /* DataModel.xcdatamodeld */; };
 		736B1C501ED832620025212F /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B1C4E1ED832620025212F /* Location+CoreDataClass.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		73196FAE1EE5630A0046803D /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		736B1C411ED6E1060025212F /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		736B1C441ED716F10025212F /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		736B1C4E1ED832620025212F /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				738FC0001ECF41F100CDEAF3 /* HudView.swift */,
 				736B1C411ED6E1060025212F /* Functions.swift */,
 				736B1C431ED716F10025212F /* DataModel.xcdatamodeld */,
+				73196FAE1EE5630A0046803D /* LocationsViewController.swift */,
 			);
 			path = MyLocations;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				736B1C451ED716F20025212F /* DataModel.xcdatamodeld in Sources */,
 				736F85D21EA7C48A0028A7A4 /* AppDelegate.swift in Sources */,
 				738FC0011ECF41F100CDEAF3 /* HudView.swift in Sources */,
+				73196FAF1EE5630A0046803D /* LocationsViewController.swift in Sources */,
 				736B1C511ED832620025212F /* Location+CoreDataProperties.swift in Sources */,
 				736B1C421ED6E1070025212F /* Functions.swift in Sources */,
 				736F85D41EA7C48A0028A7A4 /* CurrentLocationViewController.swift in Sources */,
