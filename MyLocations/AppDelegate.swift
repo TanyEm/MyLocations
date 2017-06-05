@@ -22,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let tabBarViewControllers = tabBarController.viewControllers {
             let currentLocationViewController = tabBarViewControllers[0] as! CurrentLocationViewController
             currentLocationViewController.managedObjectContext = managedObjectContext
+            // This looks up the LocationsViewController in the storyboard
+            // and gives it a reference to the managed object context.
+            let navigationController = tabBarViewControllers[1] as! UINavigationController
+            let locationsViewController = navigationController.viewControllers[0] as! LocationsViewController
+            locationsViewController.managedObjectContext = managedObjectContext
         }
         print(applicationDocumentsDirectory)
         // method so that the notification handler is registered with NotificationCenter.
