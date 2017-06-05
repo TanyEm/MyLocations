@@ -21,3 +21,14 @@ let applicationDocumentsDirectory: URL = {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]
 }()
+
+//This defines a new global function for handling fatal Core Data errors.
+let MyManagedObjectContextSaveDidFailNotification = Notification.Name(
+    rawValue: "MyManagedObjectContextSaveDidFailNotification")
+// After dumping the debug info, the function does the following:
+func fatalCoreDataError(_ error: Error) {
+    print("*** Fatal error: \(error)")
+    //NotificationCenter to post a notification
+    NotificationCenter.default.post(
+        name: MyManagedObjectContextSaveDidFailNotification, object: nil)
+}
