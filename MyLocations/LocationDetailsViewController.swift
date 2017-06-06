@@ -24,6 +24,20 @@ class LocationDetailsViewController: UITableViewController {
     var categoryName = "No Category"
     var managedObjectContext: NSManagedObjectContext!
     var date = Date()
+    var descriptionText = ""
+    
+    var locationToEdit: Location? {
+        didSet{
+            if let location = locationToEdit {
+                descriptionText = location.locationDescription
+                categoryName = location.category
+                date = location.date
+                coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+                placemark = location.placemark
+            }
+        }
+    }
+    
     
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -34,10 +48,20 @@ class LocationDetailsViewController: UITableViewController {
     
     @IBAction func done() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
-        hudView.text = "Tagged"
-        // Сreateed a new Location instance. Because this is a managed object, 
-        // you have to use its init(context:) method
-        let location = Location(context: managedObjectContext)
+        
+        let location: Location
+        // You only ask Core Data for a new Location object if you don’t already have one.
+        // You also make the text in the HUD say “Updated” when the user is editing an existing Location.
+        if let temp = locationToEdit {
+            hudView.text = "Updated"
+            location = temp
+        } else {
+            hudView.text = "Tagged"
+            // Сreateed a new Location instance. Because this is a managed object,
+            // you have to use its init(context:) method
+            location = Location(context: managedObjectContext)
+        }
+        
         //Here is set Location properties to whatever the user entered in the screen.
         location.locationDescription = descriptionTextView.text
         location.category = categoryName
@@ -72,16 +96,23 @@ class LocationDetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let location = locationToEdit {
+            title = "Edit Location"
+        }
+        
         dateLabel.text = format(date: date)
-        descriptionTextView.text = ""
+        descriptionTextView.text = descriptionText
         categoryLabel.text = categoryName
         latitudeLabel.text = String(format: "%.8f", coordinate.latitude)
         longitudeLabel.text = String(format: "%.8f", coordinate.longitude)
+        
         if let placemark = placemark {
             addressLabel.text = string(from: placemark)
         } else {
             addressLabel.text = "No Address Found"
         }
+        
         dateLabel.text = format(date: Date())
         
         //the keyboard is disappear after somebody tapped anywhere else on the screen.

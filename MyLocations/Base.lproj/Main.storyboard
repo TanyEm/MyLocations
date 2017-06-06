@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320.07042253521126"/>
+            <point key="canvasLocation" x="808" y="-344"/>
         </scene>
         <!--Tag Location-->
         <scene sceneID="SVE-NG-vag">
@@ -115,7 +115,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="(Description goes here)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="30C-H6-EVa">
-                                                    <rect key="frame" x="6" y="10" width="295" height="68"/>
+                                                    <rect key="frame" x="6" y="10" width="292" height="68"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -303,7 +303,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Up0-oc-97a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2586" y="-320"/>
+            <point key="canvasLocation" x="3306" y="-8"/>
         </scene>
         <!--Choose Category-->
         <scene sceneID="SJN-2i-TVC">
@@ -344,7 +344,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j5n-jO-eXL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="19Q-9r-GxU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3491" y="-320"/>
+            <point key="canvasLocation" x="4151" y="-8"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -363,7 +363,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="-778" y="-8"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gqW-qe-3sC">
@@ -381,7 +381,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51G-m4-0lS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1667" y="-320"/>
+            <point key="canvasLocation" x="2424" y="-8"/>
         </scene>
         <!--Locations-->
         <scene sceneID="tgY-NN-8by">
@@ -418,6 +418,7 @@
                                 <connections>
                                     <outlet property="addressLabel" destination="CwO-GA-U3M" id="6e3-0L-8py"/>
                                     <outlet property="descriptionLabel" destination="vdN-TJ-ClF" id="DsB-25-x5d"/>
+                                    <segue destination="WGu-2Q-AHL" kind="presentation" identifier="EditLocation" id="dmx-7P-acH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -430,7 +431,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="snV-CN-1Ud" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1771.875" y="397.18309859154931"/>
+            <point key="canvasLocation" x="1301" y="568"/>
         </scene>
         <!--Locations-->
         <scene sceneID="FDr-An-oYD">
@@ -447,10 +448,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lp5-9w-CCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="398"/>
+            <point key="canvasLocation" x="388" y="569"/>
         </scene>
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="dmx-7P-acH"/>
+    </inferredMetricsTieBreakers>
 </document>
