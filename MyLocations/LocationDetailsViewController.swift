@@ -50,7 +50,7 @@ class LocationDetailsViewController: UITableViewController {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
         
         let location: Location
-        // You only ask Core Data for a new Location object if you don’t already have one.
+        // You only ask Core Data for a new Location object if you don’t already have one. 
         // You also make the text in the HUD say “Updated” when the user is editing an existing Location.
         if let temp = locationToEdit {
             hudView.text = "Updated"
@@ -97,7 +97,7 @@ class LocationDetailsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let location = locationToEdit {
+        if locationToEdit != nil {
             title = "Edit Location"
         }
         
