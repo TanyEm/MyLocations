@@ -56,6 +56,8 @@ class LocationsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performFetch()
+        // An Edit button in the navigation bar that triggers a mode that lets you delete rows.
+        navigationItem.rightBarButtonItem = editButtonItem
     }
     
     // This method is invoked when the user taps a row in the Locations screen. 
@@ -99,6 +101,22 @@ class LocationsViewController: UITableViewController {
         let location = fetchedResultsController.object(at: indexPath)
         cell.configure(for: location)
         return cell
+    }
+    
+    // This method gets the Location object from the selected row and then tells the context to delete that object. 
+    // This will trigger the NSFetchedResultsController to send a notification to the delegate 
+    // (NSFetchedResultsChangeDelete), which then removes the corresponding row from the table.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
+        if editingStyle == .delete {
+            let location = fetchedResultsController.object(at: indexPath)
+            managedObjectContext.delete(location)
+            
+            do {
+                try managedObjectContext.save()
+            } catch {
+                fatalCoreDataError(error)
+            }
+        }
     }
 }
 
