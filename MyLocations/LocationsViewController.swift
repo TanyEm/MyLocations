@@ -31,8 +31,11 @@ class LocationsViewController: UITableViewController {
         // in ascending order. In order words, the Location objects that the user added
         // first will be at the top of the list.
         // There is you said “Get all Location objects from the data store and sort them by date.”
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        let sortDescriptor1 = NSSortDescriptor(key: "date", ascending: true)
+        
+        let sortDescriptor2 = NSSortDescriptor(key: "category", ascending: true)
+        //First this sorts the Location objects by category and inside each of these groups it sorts by date.
+        fetchRequest.sortDescriptors = [sortDescriptor2, sortDescriptor1]
         fetchRequest.fetchBatchSize = 20
         
         // If any Location objects change after that initial fetch, the 
@@ -41,7 +44,7 @@ class LocationsViewController: UITableViewController {
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: self.managedObjectContext,
-            sectionNameKeyPath: nil,
+            sectionNameKeyPath: "category",
             cacheName: "Locations")
         fetchedResultsController.delegate = self
             
@@ -101,6 +104,17 @@ class LocationsViewController: UITableViewController {
         let location = fetchedResultsController.object(at: indexPath)
         cell.configure(for: location)
         return cell
+    }
+    
+    // Requested the fetcher object for a list of the sections, which is an array of NSFetchedResultsSectionInfo objects
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections!.count
+    }
+    
+    // and then looked inside that array to find out how many sections there are and what their names are.
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sectionInfo = fetchedResultsController.sections![section]
+        return sectionInfo.name
     }
     
     // This method gets the Location object from the selected row and then tells the context to delete that object. 
