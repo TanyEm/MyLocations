@@ -39,6 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // immediately when the app starts up. Without this, it delays loading 
             // the view until you switch tabs, causing Core Data to get confused.
             let _ = locationsViewController.view
+            
+            // Before the MapViewController class can use the managedObjectContext, you have to give it a reference to that object first.
+            let mapViewController = tabBarViewControllers[2] as! MapViewController
+            mapViewController.managedObjectContext = managedObjectContext
         }
         print(applicationDocumentsDirectory)
         // method so that the notification handler is registered with NotificationCenter.
