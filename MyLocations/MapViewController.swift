@@ -59,7 +59,7 @@ class MapViewController: UIViewController {
     // The method takes one parameter, sender, that refers to the control that sent the action message.
     // In this case the sender will be the (i) button.
     func showLocationDetails(_ sender: UIButton) {
-        
+        performSegue(withIdentifier: "EditLocation", sender: sender)
     }
     
     func region(for annotations: [MKAnnotation]) -> MKCoordinateRegion {
@@ -102,6 +102,18 @@ class MapViewController: UIViewController {
             region = MKCoordinateRegion(center: center, span: span)
         }
         return mapView.regionThatFits(region)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditLocation" {
+            let navigationController = segue.destination as! UINavigationController
+            let controller = navigationController.topViewController as! LocationDetailsViewController
+            controller.managedObjectContext = managedObjectContext
+            
+            let button = sender as! UIButton
+            let location = locations[button.tag]
+            controller.locationToEdit = location
+        }
     }
 }
 

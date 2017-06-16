@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="808" y="-344"/>
+            <point key="canvasLocation" x="1356" y="-795"/>
         </scene>
         <!--Tag Location-->
         <scene sceneID="SVE-NG-vag">
@@ -115,7 +115,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="(Description goes here)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="30C-H6-EVa">
-                                                    <rect key="frame" x="6" y="10" width="290" height="68"/>
+                                                    <rect key="frame" x="4" y="10" width="290" height="68"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -432,7 +432,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="snV-CN-1Ud" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1301" y="568"/>
+            <point key="canvasLocation" x="1356" y="-8"/>
         </scene>
         <!--Locations-->
         <scene sceneID="FDr-An-oYD">
@@ -449,7 +449,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lp5-9w-CCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="569"/>
+            <point key="canvasLocation" x="396" y="-8"/>
         </scene>
         <!--Map-->
         <scene sceneID="mj8-1l-6LA">
@@ -494,17 +494,18 @@
                     <tabBarItem key="tabBarItem" title="Map" id="rgY-tf-nR5"/>
                     <connections>
                         <outlet property="mapView" destination="rNo-OR-09W" id="az3-4i-yf7"/>
+                        <segue destination="WGu-2Q-AHL" kind="presentation" identifier="EditLocation" id="ahn-2Z-BcN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="APv-Wa-jCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="566.25" y="1761.9718309859154"/>
+            <point key="canvasLocation" x="1356" y="789"/>
         </scene>
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dmx-7P-acH"/>
+        <segue reference="ahn-2Z-BcN"/>
     </inferredMetricsTieBreakers>
 </document>
