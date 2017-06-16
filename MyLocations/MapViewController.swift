@@ -15,7 +15,18 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    var managedObjectContext: NSManagedObjectContext!
+    var managedObjectContext: NSManagedObjectContext!{
+        didSet {
+            NotificationCenter.default.addObserver(forName:
+                Notification.Name.NSManagedObjectContextObjectsDidChange,
+                object: managedObjectContext,
+                queue: OperationQueue.main) { _ in
+                if self.isViewLoaded {
+                    self.updateLocations()
+                }
+            }
+        }
+    }
     var locations = [Location]()
     
     // When you press the User button, it zooms in the map to a region
