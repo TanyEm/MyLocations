@@ -15,19 +15,56 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    var locations = [Location]()
     var managedObjectContext: NSManagedObjectContext!{
         didSet {
             NotificationCenter.default.addObserver(forName:
                 Notification.Name.NSManagedObjectContextObjectsDidChange,
                 object: managedObjectContext,
-                queue: OperationQueue.main) { _ in
+                queue: OperationQueue.main) { notification in
                 if self.isViewLoaded {
-                    self.updateLocations()
+                    if let dictionary = notification.userInfo{
+                        if (dictionary["inserted"] as? Set<Location>) != nil{
+                            for location in self.locations {
+                                self.mapView.addAnnotation(location)
+                            }
+                        }
+                        
+                        if (dictionary["deleted"] as? Set<Location>) != nil{
+                            for location in self.locations {
+                                self.mapView.addAnnotation(location)
+                            }
+                        }
+                        
+                        if (dictionary["updated"] as? Set<Location>) != nil{
+                            for location in self.locations {
+                                self.mapView.removeAnnotation(location)
+                                self.mapView.addAnnotation(location)
+                            }
+                        }
+                        
+                        let entity = Location.entity()
+                        let fetchRequest = NSFetchRequest<Location>()
+                        fetchRequest.entity = entity
+                        self.locations = try! self.managedObjectContext.fetch(fetchRequest)
+                        for location in self.locations {
+                            let pinView = self.mapView(self.mapView, viewFor: location)
+                            if let pinView = pinView {
+                                let button = pinView.rightCalloutAccessoryView as! UIButton
+                                if let index = self.locations.index(of: pinView.annotation as! Location) {
+                                    button.tag = index
+                                    print("hello")
+                                }
+                            }
+                        }
+                        self.showLocations()
+                    }
                 }
             }
         }
     }
-    var locations = [Location]()
+
+    
     
     // When you press the User button, it zooms in the map to a region
     // that is 1000 by 1000 meters (a little more than half a mile in both 
@@ -173,5 +210,10 @@ extension MapViewController: MKMapViewDelegate {
             }
         }
         return annotationView
+    }
+}
+extension MapViewController: UINavigationBarDelegate {
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
 }
