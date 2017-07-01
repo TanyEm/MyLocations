@@ -26,6 +26,15 @@ class LocationDetailsViewController: UITableViewController {
     var date = Date()
     var descriptionText = ""
     
+    // If no photo is picked yet, image is nil, so this must be an optional.
+    var image: UIImage? {
+        didSet{
+            imageView.image = image
+            imageView.isHidden = false
+            imageView.frame = CGRect(x: 10, y: 10, width: 260, height: 260)
+            addPhotoLabel.isHidden = true
+        }
+    }
     var locationToEdit: Location? {
         didSet{
             if let location = locationToEdit {
@@ -45,6 +54,8 @@ class LocationDetailsViewController: UITableViewController {
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var addPhotoLabel: UILabel!
     
     @IBAction func done() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
@@ -166,15 +177,22 @@ class LocationDetailsViewController: UITableViewController {
     
     //the reverse geocoded address should completely fit in the Address cell
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 0 {
-            return 88
-        } else if indexPath.section == 2 && indexPath.row == 2 {
-            addressLabel.frame.size = CGSize(width: view.bounds.size.width - 115, height: 10000)
-            addressLabel.sizeToFit()
-            addressLabel.frame.origin.x = view.bounds.size.width - addressLabel.frame.size.width - 15
-            return addressLabel.frame.size.height + 20
-        } else {
-            return 44
+        
+        switch (indexPath.section, indexPath.row) {
+            case (0, 0):
+                return 88
+            
+            case (1, _):
+                return imageView.isHidden ? 44 : 280 //* (image!.size.height/image!.size.width) + 20)
+            
+            case (2, 2):
+                addressLabel.frame.size = CGSize(width: view.bounds.size.width - 115, height: 10000)
+                addressLabel.sizeToFit()
+                addressLabel.frame.origin.x = view.bounds.size.width - addressLabel.frame.size.width - 15
+                return addressLabel.frame.size.height + 20
+            
+            default:
+                return 44
         }
     }
     
@@ -205,6 +223,8 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        image = info[UIImagePickerControllerEditedImage] as? UIImage
+        tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
     

@@ -115,7 +115,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="(Description goes here)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="30C-H6-EVa">
-                                                    <rect key="frame" x="4" y="10" width="290" height="68"/>
+                                                    <rect key="frame" x="1" y="10" width="287" height="68"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -169,6 +169,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sj9-6T-Q1A">
+                                                    <rect key="frame" x="124" y="8" width="155" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -293,17 +297,19 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPhotoLabel" destination="FjR-4j-HfH" id="LXc-Ku-C3j"/>
                         <outlet property="addressLabel" destination="gDz-ZX-jQY" id="1w5-r0-fW4"/>
                         <outlet property="categoryLabel" destination="maG-FD-Zoa" id="3Ym-AE-1dg"/>
                         <outlet property="dateLabel" destination="ALi-YE-QB6" id="gkD-yS-6pd"/>
                         <outlet property="descriptionTextView" destination="30C-H6-EVa" id="pn4-lc-Kkn"/>
+                        <outlet property="imageView" destination="Sj9-6T-Q1A" id="0BF-CD-MTb"/>
                         <outlet property="latitudeLabel" destination="VtR-5f-NyJ" id="uUx-gO-mcV"/>
                         <outlet property="longitudeLabel" destination="drJ-0N-lMR" id="7ul-uv-Shs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Up0-oc-97a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3306" y="-8"/>
+            <point key="canvasLocation" x="3305.625" y="-8.4507042253521121"/>
         </scene>
         <!--Choose Category-->
         <scene sceneID="SJN-2i-TVC">
