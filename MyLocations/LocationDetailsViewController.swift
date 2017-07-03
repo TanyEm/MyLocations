@@ -25,7 +25,6 @@ class LocationDetailsViewController: UITableViewController {
     var managedObjectContext: NSManagedObjectContext!
     var date = Date()
     var descriptionText = ""
-    
     var observer: Any!
     
     
@@ -74,6 +73,7 @@ class LocationDetailsViewController: UITableViewController {
             // Сreateed a new Location instance. Because this is a managed object,
             // you have to use its init(context:) method
             location = Location(context: managedObjectContext)
+            location.photoID = nil
         }
         
         //Here is set Location properties to whatever the user entered in the screen.
@@ -83,6 +83,22 @@ class LocationDetailsViewController: UITableViewController {
         location.longitude = coordinate.longitude
         location.date = date
         location.placemark = placemark
+        
+        if let image = image {
+            // Get a new ID and assign it to the Location’s photo ID property. Only if you’re adding a photo to a Location that didn’t already have one. If a photo existed, you simply keep the same ID and overwrite the existing JPEG file.
+            if !location.hasPhoto {
+                location.photoID = Location.nextPhotoID() as NSNumber
+            }
+            // The function converts the UIImage into the JPEG format and returns a Data object
+            if let data = UIImageJPEGRepresentation(image, 0.5) {
+                // Save the Data object to the path given by the photo URL property
+                do {
+                    try data.write(to: location.photoURL, options: .atomic)
+                } catch {
+                    print("Error writing file: \(error)")
+                }
+            }
+        }
         
         //The save() method can fail and therefore you need to catch that potential error.
         do{
@@ -189,6 +205,7 @@ class LocationDetailsViewController: UITableViewController {
             }
         }
     }
+    
     deinit {
         print("*** deinit \(self)")
         NotificationCenter.default.removeObserver(observer)
