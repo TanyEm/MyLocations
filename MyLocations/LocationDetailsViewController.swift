@@ -127,6 +127,15 @@ class LocationDetailsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let location = locationToEdit {
+            title = "Edit Location"
+            if location.hasPhoto {
+                if let theImage = location.photoImage {
+                    image = theImage
+                }
+            }
+        }
+        
         if locationToEdit != nil {
             title = "Edit Location"
         }
