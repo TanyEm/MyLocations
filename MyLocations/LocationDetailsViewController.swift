@@ -26,6 +26,9 @@ class LocationDetailsViewController: UITableViewController {
     var date = Date()
     var descriptionText = ""
     
+    var observer: Any!
+    
+    
     // If no photo is picked yet, image is nil, so this must be an optional.
     var image: UIImage? {
         didSet{
@@ -176,13 +179,19 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     func listenForBackgroundNotification() {
-        NotificationCenter.default.addObserver(forName: Notification.Name.UIApplicationDidEnterBackground, object: nil,
-                                               queue: OperationQueue.main) {_ in
-            if self .presentedViewController != nil {
-                self.dismiss(animated: false, completion: nil)
+        observer = NotificationCenter.default.addObserver(forName: Notification.Name.UIApplicationDidEnterBackground, object: nil,
+                                               queue: OperationQueue.main) {[weak self] _ in
+            if let strongSelf = self {
+                if strongSelf .presentedViewController != nil {
+                    strongSelf.dismiss(animated: false, completion: nil)
+                }
+                strongSelf.descriptionTextView.resignFirstResponder()
             }
-            self.descriptionTextView.resignFirstResponder()
         }
+    }
+    deinit {
+        print("*** deinit \(self)")
+        NotificationCenter.default.removeObserver(observer)
     }
     
     // MARK: - UITableViewDelegate
