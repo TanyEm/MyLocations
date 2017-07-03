@@ -125,11 +125,13 @@ class LocationDetailsViewController: UITableViewController {
         }
         
         dateLabel.text = format(date: Date())
+        listenForBackgroundNotification()
         
         //the keyboard is disappear after somebody tapped anywhere else on the screen.
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
+        
     }
     
     //It method check where a user tap
@@ -170,6 +172,16 @@ class LocationDetailsViewController: UITableViewController {
         if segue.identifier == "PickCategory" {
             let controller = segue.destination as! CategoryPickerViewController
             controller.selectedCategoryName = categoryName
+        }
+    }
+    
+    func listenForBackgroundNotification() {
+        NotificationCenter.default.addObserver(forName: Notification.Name.UIApplicationDidEnterBackground, object: nil,
+                                               queue: OperationQueue.main) {_ in
+            if self .presentedViewController != nil {
+                self.dismiss(animated: false, completion: nil)
+            }
+            self.descriptionTextView.resignFirstResponder()
         }
     }
     
