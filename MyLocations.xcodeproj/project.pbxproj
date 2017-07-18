@@ -137,6 +137,7 @@
 				738FBFFE1ECDC29300CDEAF3 /* CategoryPickerViewController.swift */,
 				73196FAE1EE5630A0046803D /* LocationsViewController.swift */,
 				7328327F1EE95E3300F6A158 /* MapViewController.swift */,
+				73325BE81EE5981D00E9135A /* LocationCell.swift */,
 				736F85D71EA7C48A0028A7A4 /* Main.storyboard */,
 				736F85DA1EA7C48A0028A7A4 /* Assets.xcassets */,
 				736F85DC1EA7C48A0028A7A4 /* LaunchScreen.storyboard */,
@@ -144,7 +145,6 @@
 				738FC0001ECF41F100CDEAF3 /* HudView.swift */,
 				736B1C411ED6E1060025212F /* Functions.swift */,
 				736B1C431ED716F10025212F /* DataModel.xcdatamodeld */,
-				73325BE81EE5981D00E9135A /* LocationCell.swift */,
 			);
 			path = MyLocations;
 			sourceTree = "<group>";
