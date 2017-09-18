@@ -43,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Before the MapViewController class can use the managedObjectContext, you have to give it a reference to that object first.
             let mapViewController = tabBarViewControllers[2] as! MapViewController
             mapViewController.managedObjectContext = managedObjectContext
+            
+            customizeAppearance()
         }
         print(applicationDocumentsDirectory)
         // method so that the notification handler is registered with NotificationCenter.
@@ -125,6 +127,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             return rootViewController
         }
+    }
+    
+    // This changes the “bar tint” or background color of all navigation bars and tab bars in 
+    // the app to black in one fell swoop. It also sets the color of the navigation bar’s
+    // title label to white and applies the tint color to the tab bar.
+    func customizeAppearance() {
+        UINavigationBar.appearance().barTintColor = UIColor.black
+        UINavigationBar.appearance().titleTextAttributes = [ NSForegroundColorAttributeName: UIColor.white ]
+        UITabBar.appearance().barTintColor = UIColor.black
+        
+        let tintColor = UIColor(red: 255/255.0, green: 238/255.0, blue: 136/255.0, alpha: 1.0)
+        
+        UITabBar.appearance().tintColor = tintColor
     }
 }
 
