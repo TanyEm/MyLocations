@@ -61,6 +61,14 @@ class LocationsViewController: UITableViewController {
         performFetch()
         // An Edit button in the navigation bar that triggers a mode that lets you delete rows.
         navigationItem.rightBarButtonItem = editButtonItem
+        // This makes the table view itself black but does not alter the cells.
+        // The awakeFromNib() method in LocationCell.swift to change the appearance of the actual cells
+        tableView.backgroundColor = UIColor.black
+        tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
+        tableView.indicatorStyle = .white
+        
+        tableView.sectionHeaderHeight = 28
+
     }
     
     // This method is invoked when the user taps a row in the Locations screen. 
@@ -114,7 +122,7 @@ class LocationsViewController: UITableViewController {
     // and then looked inside that array to find out how many sections there are and what their names are.
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let sectionInfo = fetchedResultsController.sections![section]
-        return sectionInfo.name
+        return sectionInfo.name.uppercased()
     }
     
     // This method gets the Location object from the selected row and then tells the context to delete that object. 
@@ -132,6 +140,37 @@ class LocationsViewController: UITableViewController {
                 fatalCoreDataError(error)
             }
         }
+    }
+    
+    // MARK: - UITableViewDelegate
+    // This is a UITableView delegate method. It gets called once for each section in the table view.
+    // Here you create a label for the section name, a 1-pixel high view that functions as a separator
+    // line, and a container view to hold these two subviews.
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let labelRect = CGRect(x: 15,
+                               y: tableView.sectionHeaderHeight - 14,
+                               width: 300,
+                               height: 14)
+        let label = UILabel(frame: labelRect)
+        label.font = UIFont.boldSystemFont(ofSize: 11)
+        label.text = tableView.dataSource!.tableView!(tableView, titleForHeaderInSection: section)
+        label.textColor = UIColor(white: 1.0, alpha: 0.4)
+        label.backgroundColor = UIColor.clear
+        let separatorRect = CGRect(x: 15,
+                                   y: tableView.sectionHeaderHeight - 0.5,
+                                   width: tableView.bounds.size.width - 15,
+                                   height: 0.5)
+        let separator = UIView(frame: separatorRect)
+        separator.backgroundColor = tableView.separatorColor
+        let viewRect = CGRect(x: 0,
+                              y: 0,
+                              width: tableView.bounds.size.width,
+                              height: tableView.sectionHeaderHeight)
+        let view = UIView(frame: viewRect)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.85)
+        view.addSubview(label)
+        view.addSubview(separator)
+        return view
     }
 }
 

@@ -14,9 +14,22 @@ class LocationCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
 
+    // The method to change the appearance of the actual cells
     override func awakeFromNib() {
         super.awakeFromNib()
         photoImageView.clipsToBounds = true
+        backgroundColor = UIColor.black
+        descriptionLabel.textColor = UIColor.white
+        descriptionLabel.highlightedTextColor = descriptionLabel.textColor
+        addressLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
+        addressLabel.highlightedTextColor = addressLabel.textColor
+        
+        // This creates a new UIView filled with a dark gray color. This new view
+        // is placed on top of the cell’s background when the user taps on the cell.
+        // It looks like this: The selected cell (The Harbor) has a subtly different background color
+        let selectionView = UIView(frame: CGRect.zero)
+        selectionView.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
+        selectedBackgroundView = selectionView
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
