@@ -19,6 +19,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var getButton: UIButton!
     @IBOutlet weak var latitudeTextLabel: UILabel!
     @IBOutlet weak var longitudeTextLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     let locationManager = CLLocationManager()
     var location: CLLocation?
@@ -30,18 +31,34 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     var lastGeocodingError: Error?
     var timer: Timer?
     var managedObjectContext: NSManagedObjectContext!
-
+    var logoVisible = false
     
+    // The logo image is actually a button, so that you can tap the logo to get started.
+    lazy var logoButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setBackgroundImage(UIImage(named: "Logo"), for: .normal)
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(getLocation), for: .touchUpInside)
+        button.center.x = self.view.bounds.midX
+        button.center.y = 220
+        return button
+    }()
+
     @IBAction func getLocation() {
-        
         let authStatus = CLLocationManager.authorizationStatus()
+        
         if authStatus == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
             return
         }
+        
         if authStatus == .denied || authStatus == .restricted {
             showLocationServicesDeniedAlert()
             return
+        }
+        
+        if logoVisible {
+            hideLogoView()
         }
         
         if updatingLocation {
@@ -150,7 +167,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             } else if updatingLocation {
                 statusMessage = "Searching..."
             } else {
-                statusMessage = "Tap 'Get My Location' to Start"
+                statusMessage = ""
+                showLogoView()
             }
             messageLabel.text = statusMessage
             
@@ -266,6 +284,24 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 configureGetButton()
             }
         }
+    }
+    
+    // MARK: - Logo View
+    // This hides the container view so the labels disappear, and puts the logoButton object
+    // on the screen. This is the first time logoButton is accessed, so at this point
+    // the lazy loading kicks in.
+    func showLogoView() {
+        if !logoVisible {
+            logoVisible = true
+            containerView.isHidden = true
+            view.addSubview(logoButton)
+        }
+    }
+    
+    func hideLogoView() {
+        logoVisible = false
+        containerView.isHidden = false
+        logoButton.removeFromSuperview()
     }
 }
 
